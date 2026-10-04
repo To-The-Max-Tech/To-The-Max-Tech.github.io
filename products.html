@@ -1,0 +1,395 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Untethered-AI Products</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 20px;
+      background: #111;
+      color: #eee;
+    }
+
+    header {
+      background: linear-gradient(135deg, #000000 0%, #323134 100%);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      box-sizing: border-box;
+      padding: 1.25rem 20px;
+    }
+
+    header nav {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 1.5rem;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.3s;
+    }
+
+    nav a:hover {
+        opacity: 0.9;
+    }
+
+    h1 {
+      color: #fff;
+      text-align: center;
+    }
+
+    h3 {
+      color: #ffcc00;
+      margin-top: 20px;
+    }
+
+    .small { color: #aaa; }
+
+    .price {
+      font-weight: bold;
+      color: #4caf50;
+      font-size: 1.2em;
+      margin: 4px 0 0;
+    }
+
+    ul { padding-left: 20px; }
+    li { margin-bottom: 8px; }
+
+    pre {
+      white-space: pre-wrap;
+      background: #080808;
+      padding: 15px;
+      border-radius: 10px;
+      min-height: 180px;
+      overflow-x: auto;
+    }
+
+    /* Whole product tier is clickable and collapses/retracts. */
+    .product-tier {
+      margin: 20px 0;
+      border: 1px solid #333;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #1c1c1c;
+    }
+
+    .product-tier > summary {
+      list-style: none;
+      cursor: pointer;
+      background: #2c2c2c;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+
+    .product-tier > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .product-tier > summary:hover {
+      background: #383838;
+    }
+
+    .tier-title h3 {
+      margin: 0;
+    }
+
+    .tier-arrow {
+      color: #ffcc00;
+      font-size: 1.2rem;
+      transition: transform 0.25s ease;
+    }
+
+    .product-tier[open] .tier-arrow {
+      transform: rotate(180deg);
+    }
+
+    .tier-content {
+      padding: 4px 22px 22px;
+    }
+
+    .tier-content h3:first-child {
+      margin-top: 18px;
+    }
+
+    .card {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    .note-card {
+      margin-top: 25px;
+      padding: 22px;
+      background: #1c1c1c;
+      border: 1px solid #333;
+      border-radius: 14px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        margin: 0 auto;
+        padding: 0 12px;
+      }
+
+      header {
+        padding: 1rem 12px;
+      }
+
+      .product-tier > summary {
+        padding: 15px;
+      }
+
+      .tier-content {
+        padding: 4px 15px 15px;
+      }
+
+      pre {
+        font-size: 0.82rem;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+  <h1>Untethered-AI Products</h1>
+  <p class="small">Portable AI Solutions for Every Need</p>
+
+  <details class="product-tier">
+    <summary>
+      <span class="tier-title">
+        <h3>1TB External SSD or USB Portable AI</h3>
+        <p class="price">$80–$100</p>
+      </span>
+      <span class="tier-arrow">▼</span>
+    </summary>
+    <div class="tier-content">
+      <div class="card">
+        <h3>Windows &amp; macOS</h3>
+        <p>External SSD or USB Drive/</p>
+        <pre>├── install.bat             ← Run this first (one time only)
+├── install-core.ps1        ← Setup script (called by install.bat)
+├── start-windows.bat       ← Windows launcher (with auto-cache clearing)
+├── start-mac.command       ← Mac launcher
+├── ollama/                 ← AI engine (Windows)
+├── models/                 ← AI model files (.gguf) &amp; configs
+│   ├── installed-models.txt    ← List of installed models
+│   └── *.gguf                  ← Model weights
+├── anythingllm/            ← Your AI Interface (installed here)
+├── installer_data/         ← Temporary installer files (auto-cleaned)
+└── anythingllm_data/       ← Your chats &amp; settings (100% portable!)</pre>
+
+        <h3>Linux</h3>
+        <p>External SSD or USB Drive/</p>
+        <pre>├── install.sh             ← Linux / Mac installer
+├── preflight-check.sh     ← Linux USB drive health check [ run this first ]
+├── install-core.sh        ← Core setup logic (called by install.sh)
+└── start-linux.sh         ← Linux launcher
+├── ollama/                 ← AI engine (Windows)
+├── models/                 ← AI model files (.gguf) &amp; configs
+│   ├── installed-models.txt    ← List of installed models
+│   └── *.gguf                  ← Model weights
+├── anythingllm/            ← Your AI Interface (installed here)
+├── installer_data/         ← Temporary installer files (auto-cleaned)
+└── anythingllm_data/       ← Your chats &amp; settings (100% portable!)</pre>
+      </div>
+    </div>
+  </details>
+
+  <details class="product-tier">
+    <summary>
+      <span class="tier-title">
+        <h3>Basic Local AI Setup</h3>
+        <p class="price">$150–$250</p>
+      </span>
+      <span class="tier-arrow">▼</span>
+    </summary>
+    <div class="tier-content">
+      <div class="card">
+        <h3>Portable-AI-Studio</h3>
+        <p>External SSD or USB Drive/</p>
+        <pre>├── windows.bat                # Windows Launcher (Double-click entrypoint)
+├── linux.sh                   # Linux Launcher (Terminal entrypoint)
+├── mac.sh                     # macOS Launcher (Terminal entrypoint)
+├── LICENSE                    # MIT Open Source License
+├── .gitignore                 # Excludes models and output images from version control
+├── README.md                  # Detailed system documentation
+├── scripts/
+│   ├── setup/                 # Platform setup and backend installers
+│   ├── reset/                 # Clean install &amp; environment repair
+│   ├── server/                # UI web server and backend lifecycle manager
+│   ├── workers/               # Local worker processes
+│   ├── build/                 # Optional source build helpers
+│   └── config/                # Runtime configuration catalogs
+└── app/
+    ├── frontend/              # UI source code (Vite + React)
+    ├── models/                # Place image weights here (.safetensors, .gguf, .ckpt)
+    ├── llm-models/            # Place text GGUF weights here
+    └── outputs/               # Saved images and parameters metadata</pre>
+      </div>
+    </div>
+  </details>
+
+  <details class="product-tier">
+    <summary>
+      <span class="tier-title">
+        <h3>Advanced / Custom AI Setup</h3>
+        <p class="price">$300–$500+</p>
+      </span>
+      <span class="tier-arrow">▼</span>
+    </summary>
+    <div class="tier-content">
+      <div class="card">
+        <h3>External SSD, USB or Internal setup</h3>
+        <pre>├── install.sh
+├── LICENSE.md
+├── start.sh
+├── START.bat
+├── INSTALL.bat
+├── README.md
+├── engine/
+│   ├── linux-x64/
+│   │   ├── node/
+│   │   ├── claude/
+│   │   └── opencode/
+│   │
+│   └── windows-x64/
+│       ├── node/
+│       ├── claude/
+│       └── opencode/
+├── config/
+│   ├── claude/
+│   │   ├── settings.template.json
+│   │   └── settings.json
+│   │
+│   └── opencode/
+│       └── opencode.json
+├── data/
+│   └── home/
+├── dashboard/
+│   └── server.js
+└── tools/
+    ├── linux/
+    │   ├── launch.sh
+    │   └── dashboard.sh
+    │
+    └── windows/
+        └── launch.bat
+
+External SSD, USB or Internal setup
+                 │
+     ┌───────────┴───────────┐
+     │                       │
+Claude Code              OpenCode
+     │                       │
+OpenRouter                 Ollama
+     │                       │
+openrouter/free           Local LLM</pre>
+      </div>
+    </div>
+  </details>
+
+  <details class="product-tier">
+    <summary>
+      <span class="tier-title">
+        <h3>Optional Ongoing Support for External SSD, USB or Internal</h3>
+        <p class="price">$50–$100/hr</p>
+      </span>
+      <span class="tier-arrow">▼</span>
+    </summary>
+    <div class="tier-content">
+      <div class="card">
+        <ul>
+          <li>Regular Service updates</li>
+          <li>Over The Phone &amp; Remote Desktop service</li>
+          <li>Tradein Discounts</li>
+          <li>Repairs</li>
+          <li>Software install</li>
+          <li>AI skills and plugin install</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details class="product-tier">
+    <summary>
+      <span class="tier-title">
+        <h3>Basic setup + new SSD or USB</h3>
+        <p class="price">$230–$350</p>
+      </span>
+      <span class="tier-arrow">▼</span>
+    </summary>
+    <div class="tier-content">
+      <div class="card">
+        <ul>
+          <li>1 to 2 AI agents</li>
+          <li>Cloud LLM setup</li>
+          <li>Custom skills &amp; plugins</li>
+          <li>Custom UI</li>
+          <li>Web based dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details class="product-tier">
+    <summary>
+      <span class="tier-title">
+        <h3>Advanced setup + new SSD or USB</h3>
+        <p class="price">$380–$600+</p>
+      </span>
+      <span class="tier-arrow">▼</span>
+    </summary>
+    <div class="tier-content">
+      <div class="card">
+        <ul>
+          <li>3 to 4 AI agents</li>
+          <li>Muliple local LLMs</li>
+          <li>Custom skills &amp; plugins</li>
+          <li>Advanced Custom UI</li>
+          <li>Custom Dashboard with Voice interaction (exe, deb, msi, python, ect.)</li>
+          <li>Web based dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <div class="note-card">
+    <p class="small" style="text-align: center; margin-top: 0;">
+      All prices are estimates and may vary based on specific requirements and hardware choices.
+    </p>
+  </div>
+
+</body>
+</html>
