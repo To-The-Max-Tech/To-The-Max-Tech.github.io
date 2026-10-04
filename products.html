@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Untethered-AI Products</title>
+  <title>To The Max Tech - Untethered-AI Products</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -11,6 +12,9 @@
       padding: 0 20px;
       background: #111;
       color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -168,15 +172,31 @@
         font-size: 0.82rem;
       }
     }
-  </style>
+   /* Footer styling */
+   footer {
+       margin-top: auto;
+       padding: 20px 0;
+       text-align: center;
+       font-size: 0.9em;
+   }
+   footer p {
+       margin: 4px 0;
+   }
+   footer a {
+       color: #4caf50;
+       text-decoration: none;
+   }
+   footer a:hover {
+       text-decoration: underline;
+   }
 </head>
 <body>
     <header>
+        <div class="logo">To The Max Tech</div>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="index.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -390,6 +410,9 @@ openrouter/free           Local LLM</pre>
       All prices are estimates and may vary based on specific requirements and hardware choices.
     </p>
   </div>
-
+  <footer>
+    <p>© 2026 To The Max Tech. All rights reserved.</p>
+    <p><a href="#contact">Contact Us</a> | <a href="#services">Services</a> | <a href="#pricing">Pricing</a> | <a href="products.html">Products</a></p>
+  </footer>
 </body>
 </html>
