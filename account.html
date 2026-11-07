@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d1a">
+<title>To The Max Tech | Account Access</title>
+<style>
+:root{--bg:#090d1a;--panel:#11182a;--line:#26334d;--text:#f4f7ff;--muted:#9aa8c2;--accent:#8b5cf6;--cyan:#22d3ee;--danger:#fb7185}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(ellipse at 15% 15%,#1b2b55 0,transparent 38%),radial-gradient(ellipse at 85% 80%,#321b59 0,transparent 35%),var(--bg);color:var(--text);display:grid;place-items:center;padding:28px}
+.shell{width:min(100%,1040px);display:grid;grid-template-columns:1fr 1fr;border:1px solid #ffffff18;border-radius:26px;overflow:hidden;background:#0d1425eF;box-shadow:0 28px 90px #0009}
+.brand{padding:54px 48px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#182a50dd,#17112fdd);border-right:1px solid #ffffff14;min-height:690px}
+.logo{font-size:14px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.logo span{color:var(--cyan)}
+.brand h1{font-size:clamp(38px,5vw,58px);line-height:1.02;letter-spacing:-.045em;margin:0 0 20px}.brand h1 em{font-style:normal;color:#a78bfa}.brand p{color:#b5c2da;line-height:1.7;max-width:390px}
+.pills{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid #ffffff20;color:#d5def1;padding:8px 12px;border-radius:999px;font-size:12px}
+.form-side{padding:48px clamp(24px,5vw,58px);display:flex;align-items:center}.form-wrap{width:100%;max-width:410px;margin:auto}
+.tabs{display:flex;background:#080e1d;border:1px solid var(--line);padding:5px;border-radius:12px;margin:25px 0 28px}.tabs button{flex:1;border:0;border-radius:8px;padding:11px;background:transparent;color:var(--muted);font-weight:700;cursor:pointer}.tabs button[aria-selected=true]{background:#273455;color:white}
+h2{font-size:28px;margin:0 0 8px;letter-spacing:-.03em}.sub{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+form{display:grid;gap:15px;margin-top:25px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:12px;font-weight:700;color:#cbd5e8;margin-bottom:7px}
+input{width:100%;border:1px solid #2a3854;background:#0a1120;color:white;padding:13px 14px;border-radius:10px;font:inherit;outline:none}
+input:focus{border-color:#9b82ff;box-shadow:0 0 0 3px #8b5cf626}input::placeholder{color:#66748e}
+.field{min-width:0}.password-box{position:relative}.password-box input{padding-right:68px}.toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:0;background:none;color:#a9b7d0;font-size:12px;cursor:pointer}
+.check{display:flex;gap:9px;align-items:flex-start;color:var(--muted);font-size:12px;line-height:1.5}.check input{width:15px;height:15px;margin:1px 0 0;accent-color:var(--accent);flex:none}.check a,.inline-link{color:#b9a7ff;text-decoration:none}.check a:hover,.inline-link:hover{text-decoration:underline}
+.primary{border:0;border-radius:11px;padding:14px 16px;color:white;font-weight:800;font-size:14px;cursor:pointer;background:linear-gradient(100deg,#7c3aed,#536dfe);box-shadow:0 10px 28px #6038d333}.primary:hover{filter:brightness(1.1)}.primary:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.divider{display:flex;align-items:center;gap:12px;color:#72809b;font-size:11px;margin:20px 0}.divider:before,.divider:after{content:"";height:1px;background:#283650;flex:1}
+.secondary{width:100%;padding:12px;border-radius:10px;border:1px solid #2b3956;background:#111b30;color:#dce5f7;font-weight:700;cursor:pointer}
+.bottom{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}.bottom button{border:0;background:none;color:#b9a7ff;font:inherit;cursor:pointer}
+.notice{display:none;margin-top:15px;border:1px solid #34516a;background:#102438;color:#c9efff;border-radius:10px;padding:12px;font-size:12px;line-height:1.5}.notice.show{display:block}.error{color:var(--danger);font-size:12px;min-height:15px}
+.hidden{display:none!important}.fineprint{font-size:11px;color:#75839d;line-height:1.5;margin-top:22px}
+@media(max-width:760px){body{padding:14px}.shell{grid-template-columns:1fr}.brand{min-height:auto;padding:28px 26px;gap:25px;border-right:0;border-bottom:1px solid #ffffff14}.brand h1{font-size:36px}.brand p{margin-bottom:0}.form-side{padding:30px 24px}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <section class="brand">
+    <div class="logo">TO THE <span>MAX</span> TECH</div>
+    <div>
+      <h1>Technology.<br><em>Without limits.</em></h1>
+      <p>One account for your To The Max Tech experience. Access your tools, services, and account settings from the web or your app.</p>
+    </div>
+    <div class="pills"><span class="pill">AI &amp; Technology</span><span class="pill">One account</span><span class="pill">Web + App</span></div>
+  </section>
+  <section class="form-side">
+    <div class="form-wrap">
+      <h2 id="heading">Create your account</h2>
+      <p class="sub" id="subheading">Join To The Max Tech. It only takes a minute.</p>
+      <div class="tabs" role="tablist" aria-label="Account access">
+        <button type="button" id="signupTab" role="tab" aria-selected="true">Sign up</button>
+        <button type="button" id="loginTab" role="tab" aria-selected="false">Log in</button>
+      </div>
+      <form id="authForm" novalidate>
+        <div id="nameFields" class="row">
+          <div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" autocomplete="given-name" placeholder="Alex" required></div>
+          <div class="field"><label for="lastName">Last name</label><input id="lastName" name="lastName" autocomplete="family-name" placeholder="Morgan" required></div>
+        </div>
+        <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+        <div class="field"><label for="password">Password</label><div class="password-box"><input id="password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required><button class="toggle" type="button" data-toggle="password">Show</button></div></div>
+        <div id="confirmField" class="field"><label for="confirmPassword">Confirm password</label><div class="password-box"><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Enter password again" required><button class="toggle" type="button" data-toggle="confirmPassword">Show</button></div></div>
+        <label id="termsField" class="check"><input id="terms" type="checkbox"><span>I agree to the <a href="/terms" target="_blank" rel="noopener">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+        <label id="rememberField" class="check hidden"><input id="remember" type="checkbox"><span>Remember me on this device</span></label>
+        <div class="error" id="error" role="alert" aria-live="polite"></div>
+        <button class="primary" id="submitButton" type="submit">Create account</button>
+      </form>
+      <div class="divider">OR</div>
+      <button class="secondary" type="button" id="resetButton">Forgot your password?</button>
+      <p class="bottom" id="bottomText">Already have an account? <button type="button" id="switchButton">Log in</button></p>
+      <div class="notice" id="notice" role="status"></div>
+      <p class="fineprint">Account registration is a front-end demo. Connect this form to a secure authentication API before accepting real accounts. Never store passwords in browser storage.</p>
+    </div>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let mode = "signup";
+  const notice = $("notice");
+  function setMode(next) {
+    mode = next;
+    const signup = mode === "signup";
+    $("heading").textContent = signup ? "Create your account" : "Welcome back";
+    $("subheading").textContent = signup ? "Join To The Max Tech. It only takes a minute." : "Log in to continue to your To The Max Tech account.";
+    $("nameFields").classList.toggle("hidden", !signup);
+    $("confirmField").classList.toggle("hidden", !signup);
+    $("termsField").classList.toggle("hidden", !signup);
+    $("rememberField").classList.toggle("hidden", signup);
+    $("password").autocomplete = signup ? "new-password" : "current-password";
+    $("submitButton").textContent = signup ? "Create account" : "Log in";
+    $("signupTab").setAttribute("aria-selected", String(signup));
+    $("loginTab").setAttribute("aria-selected", String(!signup));
+    $("bottomText").innerHTML = signup
+      ? 'Already have an account? <button type="button" id="switchButton">Log in</button>'
+      : 'New to To The Max Tech? <button type="button" id="switchButton">Create an account</button>';
+    $("switchButton").addEventListener("click", () => setMode(signup ? "login" : "signup"));
+    $("error").textContent = "";
+    notice.classList.remove("show");
+  }
+  $("signupTab").addEventListener("click", () => setMode("signup"));
+  $("loginTab").addEventListener("click", () => setMode("login"));
+  $("switchButton").addEventListener("click", () => setMode("login"));
+  document.querySelectorAll("[data-toggle]").forEach(button => button.addEventListener("click", () => {
+    const input = $(button.dataset.toggle);
+    input.type = input.type === "password" ? "text" : "password";
+    button.textContent = input.type === "password" ? "Show" : "Hide";
+  }));
+  $("resetButton").addEventListener("click", () => {
+    notice.textContent = "Password recovery needs to be connected to your authentication backend. Enter your email address and use the backend's password-reset endpoint.";
+    notice.classList.add("show");
+  });
+  $("authForm").addEventListener("submit", event => {
+    event.preventDefault();
+    $("error").textContent = "";
+    notice.classList.remove("show");
+    const email = $("email").value.trim();
+    const password = $("password").value;
+    if (!email || !$("email").checkValidity()) return $("error").textContent = "Enter a valid email address.";
+    if (password.length < 8) return $("error").textContent = "Password must be at least 8 characters.";
+    if (mode === "signup") {
+      if (!$("firstName").value.trim() || !$("lastName").value.trim()) return $("error").textContent = "Enter your first and last name.";
+      if (password !== $("confirmPassword").value) return $("error").textContent = "Your passwords do not match.";
+      if (!$("terms").checked) return $("error").textContent = "Please agree to the Terms of Service and Privacy Policy.";
+    }
+    notice.textContent = mode === "signup"
+      ? "The form is valid. Next step: connect it to your registration API to create and verify the account."
+      : "The form is valid. Next step: connect it to your login API to authenticate the account.";
+    notice.classList.add("show");
+  });
+  setMode("signup");
+})();
+</script>
+</body>
+</html>
