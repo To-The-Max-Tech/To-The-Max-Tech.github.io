@@ -66,35 +66,76 @@ input:focus{border-color:#9b82ff;box-shadow:0 0 0 3px #8b5cf626}input::placehold
       <button class="secondary" type="button" id="resetButton">Forgot your password?</button>
       <p class="bottom" id="bottomText">Already have an account? <button type="button" id="switchButton">Log in</button></p>
       <div class="notice" id="notice" role="status"></div>
-      <p class="fineprint">Account registration is a front-end demo. Connect this form to a secure authentication API before accepting real accounts. Never store passwords in browser storage.</p>
+      <p class="fineprint">Your account is secured by Supabase. Never share your password or verification links.</p>
     </div>
   </section>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0"></script>
 <script>
 (() => {
+  const SUPABASE_URL = "https://qtbjsmrtfymtaxjroyxu.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_rPOOwrOGjIzr5K3BQhqmKA_RNcSnOef";
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
   const $ = id => document.getElementById(id);
   let mode = "signup";
+  let busy = false;
   const notice = $("notice");
-  function setMode(next) {
-    mode = next;
-    const signup = mode === "signup";
-    $("heading").textContent = signup ? "Create your account" : "Welcome back";
-    $("subheading").textContent = signup ? "Join To The Max Tech. It only takes a minute." : "Log in to continue to your To The Max Tech account.";
-    $("nameFields").classList.toggle("hidden", !signup);
-    $("confirmField").classList.toggle("hidden", !signup);
-    $("termsField").classList.toggle("hidden", !signup);
-    $("rememberField").classList.toggle("hidden", signup);
-    $("password").autocomplete = signup ? "new-password" : "current-password";
-    $("submitButton").textContent = signup ? "Create account" : "Log in";
-    $("signupTab").setAttribute("aria-selected", String(signup));
-    $("loginTab").setAttribute("aria-selected", String(!signup));
-    $("bottomText").innerHTML = signup
-      ? 'Already have an account? <button type="button" id="switchButton">Log in</button>'
-      : 'New to To The Max Tech? <button type="button" id="switchButton">Create an account</button>';
-    $("switchButton").addEventListener("click", () => setMode(signup ? "login" : "signup"));
+  const tabs = document.querySelector(".tabs");
+  const resetButton = $("resetButton");
+  const bottomText = $("bottomText");
+
+  function showNotice(message, isError = false) {
+    notice.textContent = message;
+    notice.classList.add("show");
+    notice.style.borderColor = isError ? "#8f3e55" : "";
+    notice.style.background = isError ? "#351725" : "";
+    notice.style.color = isError ? "#ffd1dc" : "";
+  }
+  function clearMessages() {
     $("error").textContent = "";
     notice.classList.remove("show");
   }
+  function setBusy(value) {
+    busy = value;
+    $("submitButton").disabled = value;
+    $("submitButton").style.opacity = value ? ".65" : "";
+    $("submitButton").textContent = value ? "Please wait…" : (
+      mode === "signup" ? "Create account" : mode === "login" ? "Log in" : "Update password"
+    );
+    resetButton.disabled = value;
+  }
+  function setMode(next) {
+    mode = next;
+    const signup = mode === "signup";
+    const login = mode === "login";
+    const recovery = mode === "recovery";
+    clearMessages();
+    $("heading").textContent = signup ? "Create your account" : login ? "Welcome back" : "Choose a new password";
+    $("subheading").textContent = signup
+      ? "Join To The Max Tech. It only takes a minute."
+      : login ? "Log in to continue to your To The Max Tech account."
+      : "Enter a new password for your To The Max Tech account.";
+    $("nameFields").classList.toggle("hidden", !signup);
+    $("confirmField").classList.toggle("hidden", login);
+    $("termsField").classList.toggle("hidden", !signup);
+    $("rememberField").classList.toggle("hidden", !login);
+    $("email").closest(".field").classList.toggle("hidden", recovery);
+    $("password").autocomplete = signup ? "new-password" : "current-password";
+    $("password").placeholder = recovery ? "At least 8 characters" : signup ? "At least 8 characters" : "Your password";
+    $("submitButton").textContent = signup ? "Create account" : login ? "Log in" : "Update password";
+    tabs.classList.toggle("hidden", recovery);
+    resetButton.classList.toggle("hidden", recovery);
+    bottomText.classList.toggle("hidden", recovery);
+    $("signupTab").setAttribute("aria-selected", String(signup));
+    $("loginTab").setAttribute("aria-selected", String(login));
+    if (!recovery) {
+      bottomText.innerHTML = signup
+        ? 'Already have an account? <button type="button" id="switchButton">Log in</button>'
+        : 'New to To The Max Tech? <button type="button" id="switchButton">Create an account</button>';
+      $("switchButton").addEventListener("click", () => setMode(signup ? "login" : "signup"));
+    }
+  }
+
   $("signupTab").addEventListener("click", () => setMode("signup"));
   $("loginTab").addEventListener("click", () => setMode("login"));
   $("switchButton").addEventListener("click", () => setMode("login"));
@@ -103,28 +144,99 @@ input:focus{border-color:#9b82ff;box-shadow:0 0 0 3px #8b5cf626}input::placehold
     input.type = input.type === "password" ? "text" : "password";
     button.textContent = input.type === "password" ? "Show" : "Hide";
   }));
-  $("resetButton").addEventListener("click", () => {
-    notice.textContent = "Password recovery needs to be connected to your authentication backend. Enter your email address and use the backend's password-reset endpoint.";
-    notice.classList.add("show");
+
+  resetButton.addEventListener("click", async () => {
+    clearMessages();
+    const email = $("email").value.trim();
+    if (!email || !$("email").checkValidity()) {
+      $("error").textContent = "Enter your email address above first, then select Forgot your password.";
+      $("email").focus();
+      return;
+    }
+    setBusy(true);
+    try {
+      const { error } = await client.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://tothemaxtech.com/account.html"
+      });
+      if (error) throw error;
+      showNotice("If an account exists for that email, a password-reset link is on its way. Check your inbox and spam folder.");
+    } catch (error) {
+      showNotice(error.message || "We couldn't send the reset email. Please try again.", true);
+    } finally {
+      setBusy(false);
+    }
   });
-  $("authForm").addEventListener("submit", event => {
+
+  $("authForm").addEventListener("submit", async event => {
     event.preventDefault();
-    $("error").textContent = "";
-    notice.classList.remove("show");
+    clearMessages();
     const email = $("email").value.trim();
     const password = $("password").value;
-    if (!email || !$("email").checkValidity()) return $("error").textContent = "Enter a valid email address.";
-    if (password.length < 8) return $("error").textContent = "Password must be at least 8 characters.";
+    if (mode !== "recovery" && (!email || !$("email").checkValidity())) {
+      $("error").textContent = "Enter a valid email address.";
+      return;
+    }
+    if (password.length < 8) {
+      $("error").textContent = "Password must be at least 8 characters.";
+      return;
+    }
     if (mode === "signup") {
       if (!$("firstName").value.trim() || !$("lastName").value.trim()) return $("error").textContent = "Enter your first and last name.";
       if (password !== $("confirmPassword").value) return $("error").textContent = "Your passwords do not match.";
       if (!$("terms").checked) return $("error").textContent = "Please agree to the Terms of Service and Privacy Policy.";
     }
-    notice.textContent = mode === "signup"
-      ? "The form is valid. Next step: connect it to your registration API to create and verify the account."
-      : "The form is valid. Next step: connect it to your login API to authenticate the account.";
-    notice.classList.add("show");
+    if (mode === "recovery" && password !== $("confirmPassword").value) {
+      $("error").textContent = "Your passwords do not match.";
+      return;
+    }
+
+    setBusy(true);
+    try {
+      if (mode === "signup") {
+        const { data, error } = await client.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: "https://tothemaxtech.com/account.html",
+            data: {
+              first_name: $("firstName").value.trim(),
+              last_name: $("lastName").value.trim()
+            }
+          }
+        });
+        if (error) throw error;
+        if (data.session) {
+          showNotice("Your account has been created and you're signed in.");
+        } else {
+          showNotice("Your account has been created. Check your email for a confirmation link before logging in.");
+        }
+      } else if (mode === "login") {
+        const { error } = await client.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        showNotice("You're signed in successfully.");
+      } else {
+        const { error } = await client.auth.updateUser({ password });
+        if (error) throw error;
+        await client.auth.signOut();
+        $("password").value = "";
+        $("confirmPassword").value = "";
+        setMode("login");
+        showNotice("Your password has been updated. You can now log in with your new password.");
+      }
+    } catch (error) {
+      showNotice(error.message || "Something went wrong. Please try again.", true);
+    } finally {
+      setBusy(false);
+    }
   });
+
+  client.auth.onAuthStateChange((event) => {
+    if (event === "PASSWORD_RECOVERY") {
+      setMode("recovery");
+      showNotice("Choose a new password below to finish resetting your account.");
+    }
+  });
+
   setMode("signup");
 })();
 </script>
